@@ -1,6 +1,8 @@
 package com.example.demo.Project;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,7 +21,9 @@ public class Project {
             generator = "project_sequence"
     )
 
-    private long Id ;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+    private long id ;
     private String Name;
     private String Description;
     private String ImgPath;
@@ -28,7 +32,7 @@ public class Project {
     }
 
     public Project(long id, String name, String description, String imgPath) {
-        Id = id;
+        id = id;
         Name = name;
         Description = description;
         ImgPath = imgPath;
@@ -43,7 +47,7 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", Name='" + Name + '\'' +
                 ", Description='" + Description + '\'' +
                 ", ImgPath='" + ImgPath + '\'' +
@@ -51,11 +55,11 @@ public class Project {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {
@@ -81,4 +85,6 @@ public class Project {
     public void setImgPath(String imgPath) {
         ImgPath = imgPath;
     }
+
+
 }

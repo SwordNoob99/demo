@@ -2,10 +2,10 @@ package com.example.demo.Project;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -17,14 +17,35 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public List<Project> getStudents(){
+    public List<Project> getProjects(){
 
         return projectRepository.findAll();
+
+
+
     }
 
-    public void addNewProject(Project project){
+    public Project getProjectById(Long Id){
 
-            projectRepository.save(project);
+        return projectRepository.getById(Id);
+    }
+
+    public void UpdateProject(String name, String description , String ImgPath , Long Id){
+
+         projectRepository.updateProjectInfo(name , description , ImgPath , Id);
+    }
+
+
+
+    public void addNewProject(String name , String description , String imgPath){
+
+            projectRepository.save(new Project(name , description , imgPath));
+
+    }
+
+    public void deleteProject(Long Id){
+
+        projectRepository.deleteById(Id);
 
     }
 }
